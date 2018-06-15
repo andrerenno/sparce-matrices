@@ -76,8 +76,9 @@ void delete_matrix(Matrix* matrix_ptr){
 
 float matrix_get_det(Matrix* matrix_ptr){
 
-    if (matrix_ptr -> num_of_rows != matrix_ptr -> num_of_cols)
+    if (matrix_ptr -> num_of_rows != matrix_ptr -> num_of_cols){
         return  0;
+    }
 
     int order = matrix_ptr -> num_of_rows;
     int rowflag, colflag;
@@ -225,6 +226,7 @@ int matrix_add_elem(float val, int row, int col, Matrix* matrix_ptr){
 float sum_row(int row, Matrix* matrix_ptr){
 
     if (row > matrix_ptr -> num_of_rows){
+        printf("ERROR: Row is outside the range of the matrix!\n");
         return 0;
     }
 
@@ -242,6 +244,7 @@ float sum_row(int row, Matrix* matrix_ptr){
 float sum_col(int col, Matrix* matrix_ptr){
 
     if (col > matrix_ptr -> num_of_cols){
+        printf("ERROR: Column is outside the range of the matrix!\n");
         return 0;
     }
 
@@ -271,6 +274,7 @@ void add_two_rows (float multiplier, int row_from, int row_to, Matrix* matrix_pt
 float matrix_get_elem(int row, int col, Matrix* matrix_ptr){ 
 
     if ((matrix_ptr -> num_of_rows) <= row || (matrix_ptr -> num_of_cols) <= col || (row < 0) || (col < 0)){
+        printf("ERROR: Element is outside the range of the matrix!\n");
         return 0.0;
     }
 
