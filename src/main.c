@@ -106,7 +106,6 @@ float matrix_get_det(Matrix* matrix_ptr){
         /* If the main diagonal element for this column is 0, finds a row with a non-zero element and swaps with the main diagonal row */
         for (row = col; matrix_get_elem(row, col, tmp_matrix) == 0 && row < order; row++);
         if (row != col){
-            printf("Swapping row %d and row %d (det multiplied by -1)\n", row, col);
             Elem* tmp = tmp_matrix -> elements[row];
             tmp_matrix -> elements[row] = tmp_matrix -> elements[col];
             tmp_matrix -> elements[col] = tmp;
@@ -132,13 +131,11 @@ float matrix_get_det(Matrix* matrix_ptr){
 
     /* Once we get out of the loop, tmp_matrix is now triangular matrix, so we can get the determinant by multiplying the elements of the main diagonal */
     int diag;
-    printf("Multiplying elements of main diagonal(");
     for (diag = 0; diag < order; diag++){
         printf("%.2f ", matrix_get_elem(diag, diag, tmp_matrix));
         result *= matrix_get_elem(diag, diag, tmp_matrix);
     }
     printf(")\n");
-    delete_matrix(tmp_matrix);
 
     return result;
 }
@@ -293,7 +290,6 @@ int main(void){
     char c = -1;
 
     Matrix* first_matrix = NULL;
-    system("clear");
 
     while(1){
         if (first_matrix == NULL){ 
