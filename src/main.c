@@ -159,10 +159,10 @@ int matrix_add_elem(float val, int row, int col, Matrix* matrix_ptr){
     }
 
     if (prev == NULL){
-        /* First element in row, need to modify Matrix struct */
+    /* First element in row, need to modify Matrix struct */
 
         if (current_elem != NULL && current_elem -> col == col){
-            /* There is something in this position already*/
+        /* There is something in this position already*/
 
             if (val == 0){
                 matrix_ptr -> elements[row] = current_elem -> prox;
@@ -174,7 +174,7 @@ int matrix_add_elem(float val, int row, int col, Matrix* matrix_ptr){
         }
 
         else {
-            /* There is nothing in this position */
+        /* There is nothing in this position */
 
             Elem* new_elem = malloc(sizeof(Elem));
             if (new_elem == NULL)
@@ -188,9 +188,10 @@ int matrix_add_elem(float val, int row, int col, Matrix* matrix_ptr){
         }
     }
     else {
+    /* Not first element in row, need to modify previous element */
 
         if (current_elem != NULL && current_elem -> col == col){ 
-            /* There is something in this position already*/
+        /* There is something in this position already*/
 
             if (val == 0){
                 prev -> prox = current_elem -> prox;
@@ -202,7 +203,7 @@ int matrix_add_elem(float val, int row, int col, Matrix* matrix_ptr){
         }
 
         else { 
-            /* There is nothing in this position */
+        /* There is nothing in this position */
             if (val != 0){
 
                 Elem* new_elem = malloc(sizeof(Elem));
@@ -222,19 +223,24 @@ int matrix_add_elem(float val, int row, int col, Matrix* matrix_ptr){
 }
 
 float sum_row(int row, Matrix* matrix_ptr){
+
     if (row > matrix_ptr -> num_of_rows){
         return 0;
     }
+
     Elem* current_elem = matrix_ptr -> elements[row];
     float result = 0;
+
     while(current_elem != NULL){
         result += current_elem -> value;
         current_elem = current_elem -> prox;
     }
+
     return result;
 }
 
 float sum_col(int col, Matrix* matrix_ptr){
+
     if (col > matrix_ptr -> num_of_cols){
         return 0;
     }
@@ -250,9 +256,11 @@ float sum_col(int col, Matrix* matrix_ptr){
 
 
 void add_two_rows (float multiplier, int row_from, int row_to, Matrix* matrix_ptr) {
+
     Elem* current_elem = matrix_ptr -> elements[row_from];
-    printf("Added row %d multipled by %.2f to row %d\n", row_from, multiplier, row_to);
+
     while (current_elem != NULL){
+
         /* adds a NEW element with value (value(current_elem) + value(element in row_to with the same column)) to row_to */ 
         matrix_add_elem((multiplier * (current_elem -> value)) + matrix_get_elem(row_to, current_elem -> col, matrix_ptr), row_to, current_elem -> col, matrix_ptr);
 
@@ -267,13 +275,14 @@ float matrix_get_elem(int row, int col, Matrix* matrix_ptr){
     }
 
     Elem* current_elem = matrix_ptr -> elements[row];
+
     /* Iterates through the linked list until it finds an element on the desired column (or until it passes the column) */
     while (current_elem != NULL && current_elem -> col < col){
         current_elem = current_elem -> prox;
     }
 
     if (current_elem == NULL || current_elem -> col != col){
-        /* The element is not on the list */
+    /* The element is not on the list */
         return 0.0;
     }
 
@@ -306,7 +315,7 @@ int main(void){
             if (atoi(input) == 1){
                 printf("Number of rows: ");
                 scanf(" %d", &rows);
-                printf("Number of rows: ");
+                printf("Number of cols: ");
                 scanf(" %d", &cols);
 
                 first_matrix = new_matrix(rows, cols);
