@@ -133,10 +133,8 @@ float matrix_get_det(Matrix* matrix_ptr){
     /* Once we get out of the loop, tmp_matrix is now triangular matrix, so we can get the determinant by multiplying the elements of the main diagonal */
     int diag;
     for (diag = 0; diag < order; diag++){
-        printf("%.2f ", matrix_get_elem(diag, diag, tmp_matrix));
         result *= matrix_get_elem(diag, diag, tmp_matrix);
     }
-    printf(")\n");
 
     return result;
 }
